@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-group">
+        <label>User Role:</label>
+        <select id ="selectRole" name="type" class="selectpicker form-control" data-style="py-0">
+           <option>Select</option>
+           <option>Web Designer</option>
+           <option>Web Developer</option>
+           <option>Tester</option>
+           <option>Php Developer</option>
+           <option>Ios Developer </option>
+        </select>
+     </div><div class="form-group">
+        <label for="furl">Facebook Url:</label>
+        <input type="text" class="form-control" id="furl" placeholder="Facebook Url">
+     </div>
+     <div class="form-group">
+        <label for="turl">Twitter Url:</label>
+        <input type="text" class="form-control" id="turl" placeholder="Twitter Url">
+     </div>
+     <div class="form-group">
+        <label for="instaurl">Instagram Url:</label>
+        <input type="text" class="form-control" id="instaurl" placeholder="Instagram Url">
+     </div>
+     <div class="form-group">
+        <label for="lurl">Linkedin Url:</label>
+        <input type="text" class="form-control" id="lurl" placeholder="Linkedin Url">
+     </div>
+     <div>
+         <input type="text" name="" id="uname" placeholder="username">
+     </div>
+     <div>
+         <button type="submit"id="sub_btn">subimt</button>
+     </div>
+     <script type="module">
+
+     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+  import { getDatabase, set, ref, get, child } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyCrasgQaWrXIIg5on-hRLu2hTj5aA07eiM",
+    authDomain: "profile-6891c.firebaseapp.com",
+    databaseURL: "https://profile-6891c-default-rtdb.firebaseio.com",
+    projectId: "profile-6891c",
+    storageBucket: "profile-6891c.appspot.com",
+    messagingSenderId: "237759699970",
+    appId: "1:237759699970:web:ee740709a3497ab3da9b1b"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase();
+
+  const SelectRole = document.getElementById('selectRole');
+  const facebook = document.getElementById('furl');
+  const twitter = document.getElementById('turl');
+  const insta = document.getElementById('instaurl');
+  const linkdin = document.getElementById('lurl');
+  const submit = document.getElementById('sub_btn');
+  const username = document.getElementById('uname');
+
+  function InsertData(){
+    set(ref(db, "TheUsers/" + username.value),{
+         Username : username.value,
+        //  Password : password.value,
+         Role : SelectRole.value,
+         FacebookURL : facebook.value,
+         TwitterURL : twitter.value,
+         InstagramURL : insta.value,
+         LinkedinURL : linkdin.value,
+        //  FirstName : fname.value,
+        //  LastName : lname.value,
+        //  Address1 : add1.value,
+        //  Address2 : add2.value,
+        //  CompanyName : company.value,
+        //  Country: country.value,
+        //  Mobile : mobile.value, 
+        //  AlternateContact :  altContact.value,
+        //  Email : email.value,
+        //  PinCode : pinCode.value,
+        //  City : city.value,
+
+    })
+    .then(()=>{
+        alert("Data stored successfully");
+    })
+    .catch((error)=>{
+        alert("unsuccessful,error"+error);
+    });
+}
+//------------------------------------------------------ASSIGN EVENT TO BTN------------------------------------//
+submit.addEventListener('click',InsertData);
+</script>
+</body>
+</html>
